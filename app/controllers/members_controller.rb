@@ -1,20 +1,30 @@
 class MembersController < ApplicationController
 
-  # format.json { render json: {all_data: {data: @data, data1: @data1}
+  def search
+    term = params[:term]
+    case term
+    when "senators"
+      response = Member.senators
+    when "senators_by_seniority"
+      response = Member.senators_by_seniority
+    else
+      response={error:"not found, please try again"}
+    end
 
- #  def index
- #   @vacations = @user.vacations
- #   respond_to do |format|
- #     format.html { render :index }
- #     format.json { render json: @vacations}
- #   end
- # end
+    render json: response
+  end
 
   def index
-    @senators = Member.senators
-    respond_to do |format|
-      format.json { render json: @senators}
-    end
+    @members = Member.all
+    render json: @members
+  end
+
+  def show
+    @member = Member.find_by_id(params :id)
+    render json: @member
+  end
+
+  def destroy
   end
 end
 

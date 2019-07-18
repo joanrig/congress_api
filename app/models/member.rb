@@ -1,5 +1,8 @@
 class Member < ApplicationRecord
 
+  def self.data
+    @data = [self.senators, self.senators_by_seniority]
+  end
 
 
   def self.senators
@@ -9,27 +12,6 @@ class Member < ApplicationRecord
   def self.senators_by_seniority
     self.senators.order(seniority: :desc)
   end
-
-  # def self.get_age
-  #   now = Time.now.utc.to_date
-  #   dob = self.date_of_birth
-  #
-  #   dob_year = dob[0..3].to_i
-  #   dob_month = dob[5..6].to_i
-  #   dob_day = dob[8..9].to_i
-  #
-  #   age = now.year - dob_year - ((now.month > dob_month || (now_month == dob.month && now.day >= dob.day)) ? 0 : 1)
-  #   binding.pry
-  # end
-  #
-  # def self.senators_by_age
-  #   self.senators.each do |senator|
-  #     senator.age = senator.get_age
-  #   end
-  #
-  #   self.senators.order(age: :desc)
-  # end
-
 
   def self.senate_loyalists
     self.senators.order(votes_with_party_pct: :desc)
@@ -115,3 +97,25 @@ class Member < ApplicationRecord
 
 
 end
+
+
+
+# def self.get_age
+#   now = Time.now.utc.to_date
+#   dob = self.date_of_birth
+#
+#   dob_year = dob[0..3].to_i
+#   dob_month = dob[5..6].to_i
+#   dob_day = dob[8..9].to_i
+#
+#   age = now.year - dob_year - ((now.month > dob_month || (now_month == dob.month && now.day >= dob.day)) ? 0 : 1)
+#   binding.pry
+# end
+#
+# def self.senators_by_age
+#   self.senators.each do |senator|
+#     senator.age = senator.get_age
+#   end
+#
+#   self.senators.order(age: :desc)
+# end
