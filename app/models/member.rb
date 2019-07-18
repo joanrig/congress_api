@@ -21,7 +21,7 @@ class Member < ApplicationRecord
     self.senators.order(votes_with_party_pct: asc)
   end
 
-  def self.senators_with_most_missed_votes
+  def self.truant_senators
     self.senators.order(missed_votes_pct: :desc)
   end
 
@@ -68,7 +68,7 @@ class Member < ApplicationRecord
   end
 
 
-  def self.reps_with_most_missed_votes
+  def self.truant_reps
     self.reps.order(missed_votes_pct: :desc)
   end
 

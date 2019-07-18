@@ -5,8 +5,61 @@ class MembersController < ApplicationController
     case term
     when "senators"
       response = Member.senators
+
     when "senators_by_seniority"
       response = Member.senators_by_seniority
+
+    when "senate_loyalists"
+      response = Member.senate_loyalists
+
+    when "senate mavericks"
+      response = Member.senate mavericks
+
+    when "truant_senators"
+      response = Member.truant_senators
+
+    when "female_senators"
+      response = Member.female_senators
+
+    when "democratic_senators"
+      response = Member.democratic_senators
+
+    when "female_democratic_senators"
+      response = Member.female_democratic_senators
+
+    when "republican_senators"
+      response = Member.republican_senators
+
+    when "female_republican_senators"
+      response = Member.female_republican_senators
+
+    when "reps"
+      response = Member.reps
+
+    when "reps_by_seniority"
+      response = Member.reps_by_seniority
+
+    when "house_party_loyalists"
+      response = Member.house_party_loyalists
+
+    when "house_mavericks"
+      response = Member.house_mavericks
+
+    when "truant_reps"
+      response = Member.truant_reps
+
+    when "female_reps"
+      response = Member.female_reps
+
+    when "democratic_reps"
+      response = Member.democratic_reps
+
+    when "republican_reps"
+      response = Member.republican_reps
+
+    when "female_republican_reps"
+      response = Member.female_republican_reps
+
     else
       response={error:"not found, please try again"}
     end
@@ -27,24 +80,3 @@ class MembersController < ApplicationController
   def destroy
   end
 end
-
-# senators_by_seniority = Member.senators_by_seniority
-# senate_loyalists = Member.senate_loyalists
-# senate_mavericks = Member.senate_mavericks
-# senators_missed_votes = Member.senators_with_most_missed_votes
-# female_senators = Member.female_senators
-# democratic_senators = Member.democratic_senators
-# female_democracratic_senators = Member.female_democratic_senators
-# republican_senators = Member.republican_senators
-# female_republican_senators = Member.female_republican_senators
-#
-# reps = Member.reps
-# reps_by_seniority = Member.reps_by_seniority
-# house_loyalists = Member.house_loyalists
-# house_mavericks = Member.house_mavericks
-# reps_missed_votes = Member.reps_with_most_missed_votes
-# female_reps = Member.female_reps
-# democratic_reps = Member.democratic_reps
-# female_democracratic_reps = Member.female_democratic_reps
-# republican_reps = Member.republican_reps
-# female_republican_reps = Member.female_republican_reps
