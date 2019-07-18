@@ -1,7 +1,7 @@
 class CreateMembers < ActiveRecord::Migration[5.2]
   def change
     create_table :members do |t|
-      t.integer :id
+      t.integer :propublica_id
       t.string :title
       t.string :short_title
       t.string :first_name
@@ -12,7 +12,7 @@ class CreateMembers < ActiveRecord::Migration[5.2]
       t.string :twitter_account
       t.string :facebook_account
       t.string :youtube_account
-      t.string :url
+      t.string :website
       t.string :next_election
       t.string :office
       t.string :phone
