@@ -52,7 +52,7 @@ class Member < ApplicationRecord
     self.reps.order(missed_votes_pct: :desc)
   end
 
-  def self.female.reps
+  def self.female_reps
     self.reps.where(gender:"f")
   end
 

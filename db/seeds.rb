@@ -3,7 +3,7 @@
 #senators
 
    @resp = Faraday.get 'https://api.propublica.org/congress/v1/116/senate/members.json' do |req|
-     req.headers['X-API-Key'] = 'RSrJDAWkzJmRolbAUbHDv4ArZmtuE3NoyLX5OVh1'
+     req.headers['X-API-Key'] = ENV['PROPUBLICA_API_KEY']
    end
    senate_data = JSON.parse(@resp.body)
    senators = senate_data["results"][0]["members"]
@@ -38,7 +38,7 @@
 # house members
 
   @resp = Faraday.get 'https://api.propublica.org/congress/v1/116/house/members.json' do |req|
-    req.headers['X-API-Key'] = 'RSrJDAWkzJmRolbAUbHDv4ArZmtuE3NoyLX5OVh1'
+    req.headers['X-API-Key'] = ENV['PROPUBLICA_API_KEY']
   end
   house_data = JSON.parse(@resp.body)
   representatives = house_data["results"][0]["members"]
