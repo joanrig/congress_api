@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2019_07_18_013117) do
   enable_extension "plpgsql"
 
   create_table "members", force: :cascade do |t|
+    t.string "chamber"
     t.integer "propublica_id"
     t.string "title"
     t.string "short_title"

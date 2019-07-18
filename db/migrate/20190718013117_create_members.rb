@@ -1,6 +1,7 @@
 class CreateMembers < ActiveRecord::Migration[5.2]
   def change
     create_table :members do |t|
+      t.string :chamber
       t.integer :propublica_id
       t.string :title
       t.string :short_title
