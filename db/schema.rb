@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2019_07_18_013117) do
     t.string "first_name"
     t.string "last_name"
     t.string "date_of_birth"
+    t.integer "age"
     t.string "gender"
     t.string "party"
     t.string "twitter_account"

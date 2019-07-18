@@ -17,6 +17,8 @@
      short_title: senator["short_title"],
      first_name: senator["first_name"],
      last_name: senator["last_name"],
+     #calculated in model
+     age: "",
      date_of_birth: senator["date_of_birth"],
      gender: senator["gender"],
      party: senator["party"],
@@ -54,6 +56,8 @@
     first_name: rep["first_name"],
     last_name: rep["last_name"],
     date_of_birth: rep["date_of_birth"],
+    #calculated in model 
+    age: "",
     gender: rep["gender"],
     party: rep["party"],
     twitter_account: rep["twitter_account"],

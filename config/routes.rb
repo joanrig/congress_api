@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  scope '/api/v1' do
-    resources :members
-  end
+  resources :members
+  root :to => 'members#index'
 end
