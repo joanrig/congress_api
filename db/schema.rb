@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2019_07_18_013117) do
     t.string "facebook_account"
     t.string "youtube_account"
     t.string "website"
+    t.string "contact_form"
     t.integer "seniority"
     t.string "next_election"
     t.string "office"

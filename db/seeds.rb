@@ -26,6 +26,7 @@
      facebook_account: senator["facebook_account"],
      youtube_account: senator["youtube_account"],
      website: senator["url"],
+     contact_form: senator["contact_form"],
      seniority: senator["seniority"],
      next_election: senator["next_election"],
      office: senator["office"],

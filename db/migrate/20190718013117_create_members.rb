@@ -16,6 +16,7 @@ class CreateMembers < ActiveRecord::Migration[5.2]
       t.string :facebook_account
       t.string :youtube_account
       t.string :website
+      t.string :contact_form
       t.integer :seniority
       t.string :next_election
       t.string :office
