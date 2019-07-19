@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2019_07_18_013117) do
     t.integer "age"
     t.string "gender"
     t.string "party"
+    t.string "party_logo"
     t.string "twitter_account"
     t.string "facebook_account"
     t.string "youtube_account"

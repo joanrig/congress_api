@@ -1,7 +1,6 @@
 
 
 #senators
-
    @resp = Faraday.get 'https://api.propublica.org/congress/v1/116/senate/members.json' do |req|
      req.headers['X-API-Key'] = ENV['PROPUBLICA_API_KEY']
    end
@@ -22,6 +21,7 @@
      date_of_birth: senator["date_of_birth"],
      gender: senator["gender"],
      party: senator["party"],
+     party_logo: "",
      twitter_account: senator["twitter_account"],
      facebook_account: senator["facebook_account"],
      youtube_account: senator["youtube_account"],
@@ -36,7 +36,6 @@
      votes_with_party_pct: senator["votes_with_party_pct"]
    )
   end
-
 
 # house members
 
@@ -56,10 +55,10 @@
     first_name: rep["first_name"],
     last_name: rep["last_name"],
     date_of_birth: rep["date_of_birth"],
-    #calculated in model 
     age: "",
     gender: rep["gender"],
     party: rep["party"],
+    party_logo: "",
     twitter_account: rep["twitter_account"],
     facebook_account: rep["facebook_account"],
     youtube_account: rep["youtube_account"],
@@ -74,3 +73,5 @@
     votes_with_party_pct: rep["votes_with_party_pct"]
   )
  end
+
+ Member.assign_party_logos

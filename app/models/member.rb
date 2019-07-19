@@ -1,9 +1,19 @@
 class Member < ApplicationRecord
 
-  def self.data
-    @data = [self.senators, self.senators_by_seniority]
-  end
 
+def self.assign_party_logos
+  Member.all.each do |member|
+    if member.party == "D"
+      member.update(party_logo: "https://upload.wikimedia.org/wikipedia/commons/0/02/DemocraticLogo.svg")
+    elsif member.party == "R"
+      member.update(party_logo: "https://upload.wikimedia.org/wikipedia/commons/9/9b/Republicanlogo.svg")
+    elsif member.party == "I"
+      member.update(party_logo: "https://www.justthinking.us/sites/default/files/image/Photos/Independence.png")
+    end
+  end
+end
+
+  # sorting methods
 
   def self.senators
     Member.where(chamber:"senate")
