@@ -71,7 +71,8 @@
     state: rep["state"],
     district: rep["district"],
     missed_votes_pct: rep["missed_votes_pct"],
-    votes_with_party_pct: rep["votes_with_party_pct"]
+    votes_with_party_pct: rep["votes_with_party_pct"],
+    favorite: false
   )
  end
 
