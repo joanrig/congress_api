@@ -1,37 +1,48 @@
 class Member < ApplicationRecord
 
 
-def self.assign_party_logos
-  Member.all.each do |member|
-    if member.party == "D"
-      member.update(party_logo: "https://upload.wikimedia.org/wikipedia/commons/0/02/DemocraticLogo.svg")
-    elsif member.party == "R"
-      member.update(party_logo: "https://upload.wikimedia.org/wikipedia/commons/9/9b/Republicanlogo.svg")
-    elsif ["ID", "I"].include?(member.party)
-      member.update(party_logo: "https://www.justthinking.us/sites/default/files/image/Photos/Independence.png")
+  def self.assign_party_logos
+    Member.all.each do |member|
+      if member.party == "D"
+        member.update(party_logo: "https://upload.wikimedia.org/wikipedia/commons/0/02/DemocraticLogo.svg")
+      elsif member.party == "R"
+        member.update(party_logo: "https://upload.wikimedia.org/wikipedia/commons/9/9b/Republicanlogo.svg")
+      elsif ["ID", "I"].include?(member.party)
+        member.update(party_logo: "https://www.justthinking.us/sites/default/files/image/Photos/Independence.png")
+      end
     end
   end
-end
 
 
-def self.get_social_media_links
-  Member.all.each do |member|
-    fb_path = "https://www.facebook.com/"
-    fb_account = member.facebook_account
-    fb_page = fb_path + fb_account.to_s
-    member.update(facebook_account: fb_page)
+  def self.get_social_media_links
+    Member.all.each do |member|
+      fb_path = "https://www.facebook.com/"
+      fb_account = member.facebook_account
+      fb_page = fb_path + fb_account.to_s
+      member.update(facebook_account: fb_page)
 
-    twitter_path = "https://twitter.com/"
-    twitter_account = member.twitter_account
-    twitter_page = twitter_path + twitter_account.to_s
-    member.update(twitter_account: twitter_page)
+      twitter_path = "https://twitter.com/"
+      twitter_account = member.twitter_account
+      twitter_page = twitter_path + twitter_account.to_s
+      member.update(twitter_account: twitter_page)
 
-    youtube_path = "https://youtube.com/user/"
-    youtube_account = member.youtube_account
-    youtube_page = youtube_path + youtube_account.to_s
-    member.update(youtube_account: youtube_page)
+      youtube_path = "https://youtube.com/user/"
+      youtube_account = member.youtube_account
+      youtube_page = youtube_path + youtube_account.to_s
+      member.update(youtube_account: youtube_page)
+    end
   end
-end
+
+  def self.get_age
+    Member.all.each do |member|
+      now = Time.now.utc.to_date
+      dob = member.date_of_birth.to_date
+
+      age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+
+      member.update(age: age)
+    end
+  end
 
   # sorting methods
 
@@ -41,6 +52,10 @@ end
 
   def self.senators_by_seniority
     self.senators.order(seniority: :desc)
+  end
+
+  def self.senators_by_age
+    self.senators.order(age: :asc)
   end
 
   def self.senate_loyalists
@@ -89,6 +104,10 @@ end
     self.reps.order(seniority: :desc)
   end
 
+  def self.reps_by_age
+    self.reps.order(age: :asc)
+  end
+
   def self.house_party_loyalists
     self.reps.order(votes_with_party_pct: :desc)
   end
@@ -96,7 +115,6 @@ end
   def self.house_mavericks
     self.reps.order(votes_with_party_pct: :asc)
   end
-
 
   def self.truant_reps
     self.reps.order(missed_votes_pct: :desc)
@@ -126,26 +144,6 @@ end
   end
 
 
+
+
 end
-
-
-
-# def self.get_age
-#   now = Time.now.utc.to_date
-#   dob = self.date_of_birth
-#
-#   dob_year = dob[0..3].to_i
-#   dob_month = dob[5..6].to_i
-#   dob_day = dob[8..9].to_i
-#
-#   age = now.year - dob_year - ((now.month > dob_month || (now_month == dob.month && now.day >= dob.day)) ? 0 : 1)
-#   binding.pry
-# end
-#
-# def self.senators_by_age
-#   self.senators.each do |senator|
-#     senator.age = senator.get_age
-#   end
-#
-#   self.senators.order(age: :desc)
-# end

@@ -77,3 +77,4 @@
 
  Member.assign_party_logos
  Member.get_social_media_links
+ Member.get_age
