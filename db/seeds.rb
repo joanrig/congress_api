@@ -69,6 +69,7 @@
     office: rep["office"],
     phone: rep["phone"],
     state: rep["state"],
+    state_full_name: "",
     district: rep["district"],
     missed_votes_pct: rep["missed_votes_pct"],
     votes_with_party_pct: rep["votes_with_party_pct"],
@@ -79,3 +80,4 @@
  Member.assign_party_logos
  Member.get_social_media_links
  Member.get_age
+ Member.get_full_state_name

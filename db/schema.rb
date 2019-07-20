@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2019_07_18_013117) do
     t.string "office"
     t.string "phone"
     t.string "state"
+    t.string "state_full_name"
     t.string "district"
     t.decimal "missed_votes_pct"
     t.decimal "votes_with_party_pct"
