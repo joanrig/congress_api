@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2019_07_18_013117) do
     t.string "date_of_birth"
     t.integer "age"
     t.string "gender"
-    t.string "gender_full_name"
+    t.string "gender_search_term"
     t.string "party"
     t.string "party_full_name"
     t.string "party_logo"

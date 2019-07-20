@@ -20,7 +20,7 @@
      age: "",
      date_of_birth: senator["date_of_birth"],
      gender: senator["gender"],
-     gender_full_name: "",
+     gender_search_term: "",
      party: senator["party"],
      party_full_name: "",
      party_logo: "",
@@ -61,7 +61,7 @@
     date_of_birth: rep["date_of_birth"],
     age: "",
     gender: rep["gender"],
-    gender_full_name: "",
+    gender_search_term: "",
     party: rep["party"],
     party_full_name: "",
     party_logo: "",
@@ -86,5 +86,5 @@
  Member.get_social_media_links
  Member.get_age
  Member.get_full_state_name
- Member.get_full_gender
+ Member.get_gender_search_term
  Member.get_full_party_name

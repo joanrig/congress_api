@@ -108,12 +108,12 @@ class Member < ApplicationRecord
     end
   end
 
-  def self.get_full_gender
+  def self.get_gender_search_term
     Member.all.each do |member|
       if member.gender == "M"
-        member.update(gender_full_name: "male")
+        member.update(gender_search_term: "notwomen")
       elsif member.gender == "F"
-        member.update(gender_full_name: "female")
+        member.update(gender_search_term: "women")
       end
     end
   end
