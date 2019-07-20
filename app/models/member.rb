@@ -118,6 +118,19 @@ class Member < ApplicationRecord
     end
   end
 
+  def self.get_full_party_name
+    Member.all.each do |member|
+      if member.party == "D"
+        member.update(party_full_name: "Democrat")
+      elsif member.party == "R"
+        member.update(party_full_name: "Republican")
+      #api identifies independent variously as "I" or "IN"
+      elsif ["I", "IN"].include?(member.party)
+        member.update(party_full_name: "Independent")
+      end
+    end
+  end
+
   # sorting methods
 
   def self.senators

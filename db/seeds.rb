@@ -22,6 +22,7 @@
      gender: senator["gender"],
      gender_full_name: "",
      party: senator["party"],
+     party_full_name: "",
      party_logo: "",
      twitter_account: senator["twitter_account"],
      facebook_account: senator["facebook_account"],
@@ -62,6 +63,7 @@
     gender: rep["gender"],
     gender_full_name: "",
     party: rep["party"],
+    party_full_name: "",
     party_logo: "",
     twitter_account: rep["twitter_account"],
     facebook_account: rep["facebook_account"],
@@ -85,3 +87,4 @@
  Member.get_age
  Member.get_full_state_name
  Member.get_full_gender
+ Member.get_full_party_name
