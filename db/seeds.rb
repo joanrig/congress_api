@@ -20,6 +20,7 @@
      age: "",
      date_of_birth: senator["date_of_birth"],
      gender: senator["gender"],
+     gender_full_name: "",
      party: senator["party"],
      party_logo: "",
      twitter_account: senator["twitter_account"],
@@ -32,6 +33,7 @@
      office: senator["office"],
      phone: senator["phone"],
      state: senator["state"],
+     state_full_name: "",
      district: senator["district"],
      missed_votes_pct: senator["missed_votes_pct"],
      votes_with_party_pct: senator["votes_with_party_pct"]
