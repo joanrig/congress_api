@@ -58,6 +58,7 @@
     date_of_birth: rep["date_of_birth"],
     age: "",
     gender: rep["gender"],
+    gender_full_name: "",
     party: rep["party"],
     party_logo: "",
     twitter_account: rep["twitter_account"],
@@ -81,3 +82,4 @@
  Member.get_social_media_links
  Member.get_age
  Member.get_full_state_name
+ Member.get_full_gender

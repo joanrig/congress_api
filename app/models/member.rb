@@ -13,7 +13,6 @@ class Member < ApplicationRecord
     end
   end
 
-
   def self.get_social_media_links
     Member.all.each do |member|
       fb_path = "https://www.facebook.com/"
@@ -43,7 +42,6 @@ class Member < ApplicationRecord
       member.update(age: age)
     end
   end
-
 
   def self.get_full_state_name
     states = [ ["AK", "Alaska"],
@@ -101,12 +99,21 @@ class Member < ApplicationRecord
                 ["WI", "Wisconsin"],
                 ["WV", "West Virginia"],
                 ["WY", "Wyoming"] ]
-
     Member.all.each do |member|
       states.each do |state|
-        if member.state = state[0]
+        if member.state == state[0]
           member.update(state_full_name: state[1])
         end
+      end
+    end
+  end
+
+  def self.get_full_gender
+    Member.all.each do |member|
+      if member.gender == "M"
+        member.update(gender_full_name: "male")
+      elsif member.gender == "F"
+        member.update(gender_full_name: "female")
       end
     end
   end
@@ -140,9 +147,6 @@ class Member < ApplicationRecord
   def self.female_senators
     self.senators.where(gender:"F")
   end
-
-
-
 
   def self.democratic_senators
     self.senators.where(party:"D")

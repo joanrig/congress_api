@@ -10,6 +10,7 @@ class CreateMembers < ActiveRecord::Migration[5.2]
       t.string :date_of_birth
       t.integer :age
       t.string :gender
+      t.string :gender_full_name
       t.string :party
       t.string :party_logo
       t.string :twitter_account
