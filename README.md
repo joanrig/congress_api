@@ -28,7 +28,9 @@ Here is a walkthrough video
 
 ## Usage
 
-To run this program,
+To run this app:
+
+##PART ONE:
 1. clone this repo, then run 'bundle install'.
 2. run rails db:create, rails db:migrate and rails db:seed to seed the database.
 
@@ -36,15 +38,8 @@ To run this program,
 
 4. Navigate to http://localhost:3000/ in your browser. You should see a JSON-formatted list of all Congress members.
 
-5. clone the front-end from here: https://github.com/joanrig/congress_front_end.
-
-6. Run npm install and npm start to run the front_end.
-You will be asked if you would like to run the program on another server. Type "Y" for Yes.
-
-Your browser will automatically launch the Who's Who in Congress app to its home page.
-
-You can shut down both servers by typing Control C in the terminal window where they are running.
-
+##PART TWO:
+5. GO TO https://github.com/joanrig/congress_front_end, clone that repo and follow the installation directions in the Readme.
 
 
 ## Contributing
