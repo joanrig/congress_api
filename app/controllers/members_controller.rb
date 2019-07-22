@@ -6,17 +6,23 @@ class MembersController < ApplicationController
     when "senators"
       response = Member.senators
 
+    when "senators_by_age"
+      response = Member.senators_by_age
+
     when "senators_by_seniority"
       response = Member.senators_by_seniority
 
     when "senate_loyalists"
       response = Member.senate_loyalists
 
-    when "senate mavericks"
+    when "senate_mavericks"
       response = Member.senate mavericks
 
     when "truant_senators"
       response = Member.truant_senators
+
+    when "voting_senators"
+      response = Member.voting_senators
 
     when "female_senators"
       response = Member.female_senators
@@ -36,10 +42,13 @@ class MembersController < ApplicationController
     when "reps"
       response = Member.reps
 
+    when "reps_by_age"
+      response = Member.reps_by_age
+
     when "reps_by_seniority"
       response = Member.reps_by_seniority
 
-    when "house_party_loyalists"
+    when "house_loyalists"
       response = Member.house_party_loyalists
 
     when "house_mavericks"
@@ -47,6 +56,9 @@ class MembersController < ApplicationController
 
     when "truant_reps"
       response = Member.truant_reps
+
+    when "voting_reps"
+      response = Member.voting_reps
 
     when "female_reps"
       response = Member.female_reps
@@ -61,7 +73,7 @@ class MembersController < ApplicationController
       response = Member.female_republican_reps
 
     else
-      response={error:"not found, please try again"}
+      response={error:"not found in API, please try again"}
     end
 
     render json: response

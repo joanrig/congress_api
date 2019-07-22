@@ -7,7 +7,7 @@
    senate_data = JSON.parse(@resp.body)
    senators = senate_data["results"][0]["members"]
 
-
+#empty string values are assigned in model
    senators.each do |senator|
    Member.create!(
      chamber: "senate",
@@ -16,7 +16,6 @@
      short_title: senator["short_title"],
      first_name: senator["first_name"],
      last_name: senator["last_name"],
-     #calculated in model
      age: "",
      date_of_birth: senator["date_of_birth"],
      gender: senator["gender"],
@@ -24,6 +23,7 @@
      party: senator["party"],
      party_full_name: "",
      party_logo: "",
+     image_url: "",
      twitter_account: senator["twitter_account"],
      facebook_account: senator["facebook_account"],
      youtube_account: senator["youtube_account"],
@@ -65,6 +65,7 @@
     party: rep["party"],
     party_full_name: "",
     party_logo: "",
+    image_url: "",
     twitter_account: rep["twitter_account"],
     facebook_account: rep["facebook_account"],
     youtube_account: rep["youtube_account"],
@@ -78,7 +79,7 @@
     district: rep["district"],
     missed_votes_pct: rep["missed_votes_pct"],
     votes_with_party_pct: rep["votes_with_party_pct"],
-    favorite: false
+    favorite: "no"
   )
  end
 

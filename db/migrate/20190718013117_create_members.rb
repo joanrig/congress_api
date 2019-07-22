@@ -14,6 +14,7 @@ class CreateMembers < ActiveRecord::Migration[5.2]
       t.string :party
       t.string :party_full_name
       t.string :party_logo
+      t.string :image_url
       t.string :twitter_account
       t.string :facebook_account
       t.string :youtube_account
@@ -28,7 +29,7 @@ class CreateMembers < ActiveRecord::Migration[5.2]
       t.string :district
       t.decimal :missed_votes_pct
       t.decimal :votes_with_party_pct
-      t.boolean :favorite, :default => false
+      t.string :favorite, :default => "no"
 
       t.timestamps
     end

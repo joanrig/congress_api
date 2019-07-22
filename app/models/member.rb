@@ -111,9 +111,9 @@ class Member < ApplicationRecord
   def self.get_gender_search_term
     Member.all.each do |member|
       if member.gender == "M"
-        member.update(gender_search_term: "notwomen")
+        member.update(gender_search_term: "womenfalse")
       elsif member.gender == "F"
-        member.update(gender_search_term: "women")
+        member.update(gender_search_term: "womentrue")
       end
     end
   end
@@ -131,6 +131,14 @@ class Member < ApplicationRecord
     end
   end
 
+  def self.get_headshot
+    headshots = [
+      ["Feinstein, Dianne", "https://www.feinstein.senate.gov/public/_cache/files/f/7/f784d398-78e2-402f-90da-7c48a8fa4a89/6978A65F6DC241B15DD9752496365D44.04official-hi-res-photogallery.jpg"],
+      ["Booker, Cory", "https://upload.wikimedia.org/wikipedia/commons/5/59/Cory_Booker%2C_official_portrait%2C_114th_Congress.jpg"],
+      ["Casey, Bob" "https://en.wikipedia.org/wiki/Bob_Casey_Jr.#/media/File:Bob_Casey_Jr._official_photo.jpg"]
+      ]
+  end
+
   # sorting methods
 
   def self.senators
@@ -142,7 +150,7 @@ class Member < ApplicationRecord
   end
 
   def self.senators_by_age
-    self.senators.order(age: :asc)
+    self.senators.order(age: :desc)
   end
 
   def self.senate_loyalists
@@ -156,6 +164,11 @@ class Member < ApplicationRecord
   def self.truant_senators
     self.senators.order(missed_votes_pct: :desc)
   end
+
+  def self.voting_senators
+    self.senators.order(missed_votes_pct: :asc)
+  end
+
 
   def self.female_senators
     self.senators.where(gender:"F")
@@ -184,15 +197,15 @@ class Member < ApplicationRecord
     Member.where(chamber:"house")
   end
 
+  def self.reps_by_age
+    self.reps.order(age: :desc)
+  end
+
   def self.reps_by_seniority
     self.reps.order(seniority: :desc)
   end
 
-  def self.reps_by_age
-    self.reps.order(age: :asc)
-  end
-
-  def self.house_party_loyalists
+  def self.house_loyalists
     self.reps.order(votes_with_party_pct: :desc)
   end
 
@@ -202,6 +215,10 @@ class Member < ApplicationRecord
 
   def self.truant_reps
     self.reps.order(missed_votes_pct: :desc)
+  end
+
+  def self.voting_reps
+    self.reps.order(missed_votes_pct: :asc)
   end
 
   def self.female_reps

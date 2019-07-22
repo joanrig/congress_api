@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2019_07_18_013117) do
     t.string "party"
     t.string "party_full_name"
     t.string "party_logo"
+    t.string "image_url"
     t.string "twitter_account"
     t.string "facebook_account"
     t.string "youtube_account"
@@ -43,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_07_18_013117) do
     t.string "district"
     t.decimal "missed_votes_pct"
     t.decimal "votes_with_party_pct"
-    t.boolean "favorite", default: false
+    t.string "favorite", default: "no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
