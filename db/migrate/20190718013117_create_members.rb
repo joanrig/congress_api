@@ -8,7 +8,6 @@ class CreateMembers < ActiveRecord::Migration[5.2]
       t.string :first_name
       t.string :last_name
       t.string :date_of_birth
-      t.integer :age
       t.string :gender
       t.string :gender_search_term
       t.string :party

@@ -1,6 +1,17 @@
 class Member < ApplicationRecord
 
 
+  def self.get_age
+    Member.all.each do |member|
+      now = Time.now.utc.to_date
+      dob = member.date_of_birth.to_date
+
+      age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+
+      member.update(age: age)
+    end
+  end
+
   def self.assign_party_logos
     Member.all.each do |member|
       if member.party == "D"
@@ -29,17 +40,6 @@ class Member < ApplicationRecord
       youtube_account = member.youtube_account
       youtube_page = youtube_path + youtube_account.to_s
       member.update(youtube_account: youtube_page)
-    end
-  end
-
-  def self.get_age
-    Member.all.each do |member|
-      now = Time.now.utc.to_date
-      dob = member.date_of_birth.to_date
-
-      age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
-
-      member.update(age: age)
     end
   end
 

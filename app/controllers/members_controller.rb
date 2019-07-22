@@ -16,7 +16,7 @@ class MembersController < ApplicationController
       response = Member.senate_loyalists
 
     when "senate_mavericks"
-      response = Member.senate mavericks
+      response = Member.senate_mavericks
 
     when "truant_senators"
       response = Member.truant_senators

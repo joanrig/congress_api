@@ -83,9 +83,9 @@
   )
  end
 
+ Member.get_age
  Member.assign_party_logos
  Member.get_social_media_links
- Member.get_age
  Member.get_full_state_name
  Member.get_gender_search_term
  Member.get_full_party_name
