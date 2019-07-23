@@ -37,7 +37,8 @@
      state_full_name: "",
      district: senator["district"],
      missed_votes_pct: senator["missed_votes_pct"],
-     votes_with_party_pct: senator["votes_with_party_pct"]
+     votes_with_party_pct: senator["votes_with_party_pct"],
+     running_for_president: false
    )
   end
 
@@ -79,7 +80,8 @@
     district: rep["district"],
     missed_votes_pct: rep["missed_votes_pct"],
     votes_with_party_pct: rep["votes_with_party_pct"],
-    favorite: "no"
+    favorite: "no",
+    running_for_president: false
   )
  end
 
@@ -89,3 +91,4 @@
  Member.get_full_state_name
  Member.get_gender_search_term
  Member.get_full_party_name
+ Member.update_running_for_president

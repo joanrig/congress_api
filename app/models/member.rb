@@ -139,6 +139,19 @@ class Member < ApplicationRecord
       ]
   end
 
+  def self.update_running_for_president
+    candidates = %w[Bennet Biden Booker Gabbard Gillibrand Harris Klobuchar Moulton O'Rourke Ryan Sanders Warren]
+
+    Member.all.each do |member|
+      candidates.each do |candidate|
+        if candidate == member.last_name
+          member.update(running_for_president: true)
+        end
+      end
+    end
+  end
+
+
   # sorting methods
 
   def self.senators
