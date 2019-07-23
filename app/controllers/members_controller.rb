@@ -6,8 +6,11 @@ class MembersController < ApplicationController
     when "senators"
       response = Member.senators
 
+    when "presidential_candidates"
+      response = Member.running_for_president
+
     when "senators_by_age"
-      response = Member.senators_by_age 
+      response = Member.senators_by_age
 
     when "senators_by_seniority"
       response = Member.senators_by_seniority

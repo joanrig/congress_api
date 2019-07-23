@@ -257,6 +257,10 @@ class Member < ApplicationRecord
     self.republican_reps.where(gender:"F")
   end
 
+  def self.presidential_candidates
+    Member.where(running_for_president: true)
+  end
+
 
 
 
