@@ -92,6 +92,5 @@ class MembersController < ApplicationController
     render json: @member
   end
 
-  def destroy
-  end
+
 end

@@ -1,9 +1,11 @@
 class BillsController < ApplicationController
 
+#brings in 20 most recent bills through fetch method in model
   def search
     Bill.get_bills_by_member
   end
 
+#adds those bills to database
   def create
     if Bill.get_bills_by_member
       Bill.get_bills_by_member.each do |bill|

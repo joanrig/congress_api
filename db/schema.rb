@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_194053) do
+ActiveRecord::Schema.define(version: 2019_07_23_212352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_194053) do
     t.text "cosponsors_by_party"
     t.text "committees"
     t.string "primary_subject"
+    t.integer "member_id"
   end
 
   create_table "members", force: :cascade do |t|
