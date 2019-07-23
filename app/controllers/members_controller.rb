@@ -52,7 +52,7 @@ class MembersController < ApplicationController
       response = Member.reps_by_seniority
 
     when "house_loyalists"
-      response = Member.house_party_loyalists
+      response = Member.house_loyalists
 
     when "house_mavericks"
       response = Member.house_mavericks

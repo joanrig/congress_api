@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_041508) do
+ActiveRecord::Schema.define(version: 2019_07_23_155750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "members", force: :cascade do |t|
     t.string "chamber"
-    t.integer "propublica_id"
+    t.string "propublica_id"
     t.string "title"
     t.string "short_title"
     t.string "first_name"

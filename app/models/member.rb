@@ -125,7 +125,7 @@ class Member < ApplicationRecord
       elsif member.party == "R"
         member.update(party_full_name: "Republican")
       #api identifies independent variously as "I" or "IN"
-      elsif ["I", "IN"].include?(member.party)
+    elsif member.party == "ID"
         member.update(party_full_name: "Independent")
       end
     end
@@ -151,7 +151,6 @@ class Member < ApplicationRecord
     end
   end
 
-
   # sorting methods
 
   def self.senators
@@ -171,7 +170,7 @@ class Member < ApplicationRecord
   end
 
   def self.senate_mavericks
-    self.senators.order(votes_with_party_pct: asc)
+    self.senators.order(votes_with_party_pct: :asc)
   end
 
   def self.truant_senators
