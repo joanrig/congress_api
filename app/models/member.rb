@@ -34,7 +34,7 @@ class Member < ApplicationRecord
       twitter_path = "https://twitter.com/"
       twitter_account = member.twitter_account
       twitter_page = twitter_path + twitter_account.to_s
-      member.update(twitter_account: twitter_page)
+      member.update(twitter_account: twitter_page, twitter_handle: twitter_account)
 
       youtube_path = "https://youtube.com/user/"
       youtube_account = member.youtube_account

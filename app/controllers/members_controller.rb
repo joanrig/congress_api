@@ -7,7 +7,7 @@ class MembersController < ApplicationController
       response = Member.senators
 
     when "senators_by_age"
-      response = Member.senators_by_age
+      response = Member.senators_by_age 
 
     when "senators_by_seniority"
       response = Member.senators_by_seniority
