@@ -1,4 +1,5 @@
 class Member < ApplicationRecord
+  has_many :bills
 
 
   def self.get_age

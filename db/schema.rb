@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_155750) do
+ActiveRecord::Schema.define(version: 2019_07_23_194053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bills", force: :cascade do |t|
+    t.string "congress"
+    t.string "bill_id"
+    t.string "chamber"
+    t.string "number"
+    t.string "title"
+    t.string "short_title"
+    t.string "sponsor_id"
+    t.string "govtrack_url"
+    t.string "introduced_date"
+    t.boolean "active"
+    t.string "last_vote"
+    t.boolean "house_passage"
+    t.boolean "senate_passage"
+    t.boolean "enacted"
+    t.boolean "vetoed"
+    t.integer "cosponsors"
+    t.text "cosponsors_by_party"
+    t.text "committees"
+    t.string "primary_subject"
+  end
 
   create_table "members", force: :cascade do |t|
     t.string "chamber"
