@@ -43,7 +43,6 @@
   end
 
 # house members
-
   @resp = Faraday.get 'https://api.propublica.org/congress/v1/116/house/members.json' do |req|
     req.headers['X-API-Key'] = ENV['PROPUBLICA_API_KEY']
   end
