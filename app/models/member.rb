@@ -1,5 +1,7 @@
 class Member < ApplicationRecord
   has_many :bills
+  accepts_nested_attributes_for :bills
+  serialize :bills
 
 
   def self.get_age

@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_24_182058) do
+ActiveRecord::Schema.define(version: 2019_07_23_194053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bills", force: :cascade do |t|
+    t.integer "member_id"
     t.string "congress"
     t.string "bill_id"
-    t.string "chamber"
+    t.string "bill_type"
     t.string "number"
     t.string "title"
     t.string "short_title"
@@ -35,7 +36,6 @@ ActiveRecord::Schema.define(version: 2019_07_24_182058) do
     t.text "cosponsors_by_party"
     t.text "committees"
     t.string "primary_subject"
-    t.integer "member_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -72,11 +72,6 @@ ActiveRecord::Schema.define(version: 2019_07_24_182058) do
     t.integer "age"
     t.string "twitter_handle"
     t.boolean "running_for_president"
-  end
-
-  create_table "searches", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end
