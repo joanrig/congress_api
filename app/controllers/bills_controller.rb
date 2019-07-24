@@ -1,40 +1,37 @@
 class BillsController < ApplicationController
 
-#brings in 20 most recent bills through fetch method in model
-  def search
-    Bill.get_bills_by_member
-  end
 
-#adds those bills to database
-  def create
-    if Bill.get_bills_by_member
-      Bill.get_bills_by_member.each do |bill|
-      Bill.create(
+#get bills from database by member id
+  def search
+    id = params[:id]
+    resp = Faraday.get `https://api.propublica.org/congress/v1/members/#{id}/bills/introduced.json` do |req|
+      req.headers['X-API-Key'] = ENV['PROPUBLICA_API_KEY']
+    binding.pry
+    end
+
+    data = JSON.parse(@resp.body)
+    bills = data["results"][0]["bills"][0]
+    @member = Member.find_by(propublica_id: id)
+
+    bills.each do |bill|
+      new_bill = Bill.new(
         congress: bill["congress"],
-        bill_id: bill["bill_id"],
-        chamber: bill["bill_type"],
-        number: bill["number"],
-        title: bill["title"],
-        short_title: bill["short_title"],
-        sponsor_id: bill["sponsor_id"],
-        gov_track_url: bill["govtrack_url"],
-        introduced_date: bill["introduced_date"],
-        active: bill["active"],
-        last_vote: bill["last_vote"],
-        house_passage: bill["house_passage"],
-        senate_passage: bill["senate_passage"],
-        enacted: bill["enacted"],
-        vetoed: bill["vetoed"],
-        cosponsors: bill["cosponsors"],
-        consponsors_by_party: bill["consponsors_by_party"],
-        committees: bill["committees"],
-        primary_subject: bill["primary_subject"]
+        #more fields here
       )
+
+      #check to see if bill already in db
+      Bills.each do |bill|
+        if !Bill.find_by_id(bill_id: new_bill_id)
+        new_bill.save
+        @member.bills << new_bill
+      end
+      render json: member.bills
+    end
   end
 
   def index
-
     @bills = Bill.all
+    #need to change this to show only member's bills etc.
     render json: @bills
   end
 
