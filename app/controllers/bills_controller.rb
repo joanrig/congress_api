@@ -32,13 +32,12 @@ def search
         primary_subject: bill["primary_subject"],
         member_id: @member.id
       )
-      #bills are associated, you can see them in @member.bills
+      #bills are associated, you can see them in @member.bills and json on localhost3000.
     end
   end
 
 
   if @member.bills
-    binding.pry
     render json: @member.bills
     #returns json
   else
