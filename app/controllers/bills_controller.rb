@@ -3,6 +3,7 @@ class BillsController < ApplicationController
 #get 20 most recent bills by member id
 def search
   id = params[:id]
+  @member = Member.find_by(propublica_id: id)
   @resp = Faraday.get 'https://api.propublica.org/congress/v1/members/'+id+'/bills/introduced.json' do |req|
     req.headers['X-API-Key'] = ENV['PROPUBLICA_API_KEY']
   end
@@ -11,9 +12,7 @@ def search
 
 
   bills.each do |bill|
-    member = Member.find_by(propublica_id: bill["sponsor_id"])
     if !Bill.find_by(bill_id: bill["bill_id"])
-      binding.pry
       Bill.create!(
         bill_id: bill["bill_id"],
         congress: bill["congress"],
@@ -34,14 +33,15 @@ def search
         cosponsors_by_party: bill["cosponsors_by_party"],
         committees: bill["committees"],
         primary_subject: bill["primary_subject"],
-        member_id: member.id
+        member_id: @member.id
       )
     end
   end
 
-   member = Member.find_by(propublica_id: member.id)
-  if member.bills
-    render json: member.bills
+  
+  if @member.bills
+    binding.pry
+    render json: @member.bills
   else
     response={error:"We could not find any bills sponsored by this Congress Member. Please try again"}
   end
