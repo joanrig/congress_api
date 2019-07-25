@@ -13,12 +13,11 @@ def search
 
   bills.each do |bill|
     if !Bill.find_by(bill_id: bill["bill_id"])
-      Bill.create!(
+      @new_bill = Bill.create!(
         bill_id: bill["bill_id"],
         congress: bill["congress"],
         bill_type: bill["bill_type"],
         number: bill["number"],
-        title: bill["title"],
         short_title: bill["short_title"],
         sponsor_id: bill["sponsor_id"],
         govtrack_url: bill["govtrack_url"],
@@ -29,19 +28,19 @@ def search
         senate_passage: bill["senate_passage"],
         enacted: bill["enacted"],
         vetoed: bill["vetoed"],
-        cosponsors: bill["cosponsors"],
-        cosponsors_by_party: bill["cosponsors_by_party"],
         committees: bill["committees"],
         primary_subject: bill["primary_subject"],
         member_id: @member.id
       )
+      #bills are associated, you can see them in @member.bills
     end
   end
 
-  
+
   if @member.bills
     binding.pry
     render json: @member.bills
+    #returns json
   else
     response={error:"We could not find any bills sponsored by this Congress Member. Please try again"}
   end
