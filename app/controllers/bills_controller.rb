@@ -10,7 +10,7 @@ def search
   bills = bills_data["results"][0]["bills"]
 
   bills.each do |bill|
-    member = Member.find_by(propublica_id: bill["sponsor_id"])
+    @member = Member.find_by(propublica_id: bill["sponsor_id"])
     if !Bill.find_by(bill_id: bill["bill_id"])
       Bill.create!(
         bill_id: bill["bill_id"],
@@ -32,14 +32,14 @@ def search
         cosponsors_by_party: bill["cosponsors_by_party"],
         committees: bill["committees"],
         primary_subject: bill["primary_subject"],
-        member_id: member.id
+        member_id: `#{@member.id}`
       )
     end
   end
 
-  member = Member.find_by(propublica_id: member.id)
-  if member.bills
-    render json: member.bills
+  # member = Member.find_by(propublica_id: member.id)
+  if @member.bills
+    render json: @member.bills
   else
     response={error:"We could not find any bills sponsored by this Congress Member. Please try again"}
   end
