@@ -5,5 +5,6 @@ Rails.application.routes.draw do
 
 
   get '/search/:term', to: 'members#search'
-  get '/search/bills/:id', to: 'bills#search'
+  get '/search/bills/member/:id', to: 'bills#search_by_member'
+  get '/search/bills/:query', to: 'bills#search_by_query'
 end
