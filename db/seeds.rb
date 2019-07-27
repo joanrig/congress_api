@@ -109,6 +109,8 @@
 
  #
 
+ Member.get_age
+ Member.get_party_logo
  Member.get_social_media_links
  Member.get_full_state_name
  Member.get_gender_search_term

@@ -15,7 +15,7 @@ class Member < ApplicationRecord
     end
   end
 
-  def self.assign_party_logos
+  def self.get_party_logo
     Member.all.each do |member|
       if member.party == "D"
         member.update(party_logo: "https://upload.wikimedia.org/wikipedia/commons/0/02/DemocraticLogo.svg")
@@ -29,20 +29,26 @@ class Member < ApplicationRecord
 
   def self.get_social_media_links
     Member.all.each do |member|
-      fb_path = "https://www.facebook.com/"
-      fb_account = member.facebook_account
-      fb_page = fb_path + fb_account.to_s
-      member.update(facebook_account: fb_page)
 
-      twitter_path = "https://twitter.com/"
-      twitter_account = member.twitter_account
-      twitter_page = twitter_path + twitter_account.to_s
-      member.update(twitter_account: twitter_page, twitter_handle: twitter_account)
+        fb_path = "https://www.facebook.com/"
+        fb_account = member.facebook_account
+        fb_page = fb_path + fb_account.to_s
+        member.update(facebook_account: fb_page)
 
-      youtube_path = "https://youtube.com/user/"
-      youtube_account = member.youtube_account
-      youtube_page = youtube_path + youtube_account.to_s
-      member.update(youtube_account: youtube_page)
+      if member.twitter_account
+        twitter_path = "https://twitter.com/"
+        twitter_account = member.twitter_account
+        twitter_page = twitter_path + twitter_account.to_s
+        member.update(twitter_account: twitter_page, twitter_handle: twitter_account)
+      end
+
+      if member.youtube_account
+        youtube_path = "https://youtube.com/user/"
+        youtube_account = member.youtube_account
+        youtube_page = youtube_path + youtube_account.to_s
+        member.update(youtube_account: youtube_page)
+      end
+
     end
   end
 
