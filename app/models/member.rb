@@ -1,4 +1,5 @@
 class Member < ApplicationRecord
+  validates :propublica_id, uniqueness:true
   has_many :bills
   accepts_nested_attributes_for :bills
   serialize :bills
@@ -142,6 +143,7 @@ class Member < ApplicationRecord
       ]
   end
 
+#this info is manual, not auto updated from API
   def self.update_running_for_president
     candidates = %w[Bennet Biden Booker Gabbard Gillibrand Harris Klobuchar Moulton O'Rourke Ryan Sanders Warren]
 
@@ -149,6 +151,34 @@ class Member < ApplicationRecord
       candidates.each do |candidate|
         if candidate == member.last_name
           member.update(running_for_president: true)
+        end
+      end
+    end
+  end
+
+
+  def self.get_retirement_status
+    @resp = Faraday.get 'https://api.propublica.org/congress/v1/116/senate/members/leaving.json' do |req|
+      req.headers['X-API-Key'] = ENV['PROPUBLICA_API_KEY']
+    end
+    data = JSON.parse(@resp.body)
+    leaving_senators = data["results"][0]["members"]
+
+    @resp = Faraday.get 'https://api.propublica.org/congress/v1/116/house/members/leaving.json' do |req|
+      req.headers['X-API-Key'] = ENV['PROPUBLICA_API_KEY']
+    end
+    data = JSON.parse(@resp.body)
+    leaving_reps = data["results"][0]["members"]
+
+    leaving = leaving_senators + leaving_reps
+
+    leaving.each do |leaving_member|
+      Member.all.each do |member|
+        if leaving_member["id"] ==  member.propublica_id
+          member.update(
+            status: leaving_member["status"],
+            status_note: leaving_member["note"]
+          )
         end
       end
     end
