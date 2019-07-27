@@ -191,7 +191,8 @@ class Member < ApplicationRecord
 
   def self.get_clickable_phone_number
     Member.all.each do |member|
-      clickable = member.phone.to_s.gsub('-','')
+      number = member.phone.to_s.gsub('-','')
+      clickable = 'tel:'+number
       member.update(phone_clickable: clickable)
     end
   end
