@@ -140,6 +140,7 @@ class Member < ApplicationRecord
     end
   end
 
+
   def self.get_headshot
     headshots = [
       ["Feinstein, Dianne", "https://www.feinstein.senate.gov/public/_cache/files/f/7/f784d398-78e2-402f-90da-7c48a8fa4a89/6978A65F6DC241B15DD9752496365D44.04official-hi-res-photogallery.jpg"],
@@ -160,7 +161,6 @@ class Member < ApplicationRecord
       end
     end
   end
-
 
   def self.get_retirement_status
     @resp = Faraday.get 'https://api.propublica.org/congress/v1/116/senate/members/leaving.json' do |req|
@@ -186,6 +186,13 @@ class Member < ApplicationRecord
           )
         end
       end
+    end
+  end
+
+  def self.get_clickable_phone_number
+    Member.all.each do |member|
+      clickable = member.phone.to_s.gsub('-','')
+      member.update(phone_clickable: clickable)
     end
   end
 

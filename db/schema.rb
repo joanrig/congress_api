@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2019_07_27_162713) do
     t.string "next_election"
     t.string "office"
     t.string "phone"
+    t.string "phone_clickable"
     t.string "state"
     t.string "state_full_name"
     t.string "district"

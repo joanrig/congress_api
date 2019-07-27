@@ -117,3 +117,4 @@
  Member.get_full_party_name
  Member.update_running_for_president
  Member.get_retirement_status
+ Member.get_clickable_phone_number
