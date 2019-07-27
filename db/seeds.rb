@@ -10,7 +10,6 @@
 #empty string values are assigned in model
 #update seeds w/o adding duplicates/ dropping db
   senators.each do |senator|
-    if !senator["id"]
        Member.create!(
          chamber: "senate",
          propublica_id: senator["id"],
@@ -43,7 +42,7 @@
          running_for_president: false
        )
     end
-  end
+
 
 
 # house members
@@ -55,7 +54,6 @@
 
 #update seeds w/o adding duplicates/ dropping db
   representatives.each do |rep|
-    if !rep["id"]
       Member.create!(
         chamber: "house",
         propublica_id: rep["id"],
@@ -88,17 +86,14 @@
         running_for_president: false
       )
      end
-   end
 
 
-# #update seeds w/o dropping db
+#update seeds w/o dropping db
 # Member.all.each do |member|
 #   if !member.age
 #     member.get_age
 #   elsif !member.party_logo
 #     member.get_party_logo
-#   elsif !member.facebook_account
-#     member.get_social_media_links
 #   elsif !member.state_full_name
 #     member.get_full_state_name
 #   elsif !member.gender_search_term
@@ -113,7 +108,7 @@
 # end
 
  #
- Member.assign_party_logos
+
  Member.get_social_media_links
  Member.get_full_state_name
  Member.get_gender_search_term

@@ -1,5 +1,4 @@
 class Member < ApplicationRecord
-  validates :propublica_id, uniqueness:true
   has_many :bills
   accepts_nested_attributes_for :bills
   serialize :bills
