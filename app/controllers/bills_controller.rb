@@ -51,7 +51,6 @@ class BillsController < ApplicationController
     end
     bills_data = JSON.parse(@resp.body)
     bills = bills_data["results"]
-
     if bills
       bills.each do |bill|
         if !Bill.find_by(bill_id: bill["bill_id"])
