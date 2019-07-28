@@ -45,7 +45,6 @@ class BillsController < ApplicationController
 
 #works from browser, can't call it from front end.
   def search_by_query
-    binding.pry
     query = params[:query]
     @resp = Faraday.get 'https://api.propublica.org/congress/v1/bills/subjects/'+query+'.json' do |req|
       req.headers['X-API-Key'] = ENV['PROPUBLICA_API_KEY']
@@ -76,7 +75,6 @@ class BillsController < ApplicationController
           )
         end
       end
-
       render json: bills
     else
       response={error:"We could not find any recent bills on this subject. Please try again"}

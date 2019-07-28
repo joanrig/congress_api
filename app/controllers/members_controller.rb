@@ -1,6 +1,7 @@
 class MembersController < ApplicationController
 
   def search
+    binding.pry
     term = params[:term]
     case term
     when "senators"
