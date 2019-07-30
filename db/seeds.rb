@@ -1,4 +1,5 @@
-
+Member.destroy_all
+Bill.destroy_all
 
 #senators
    @resp = Faraday.get 'https://api.propublica.org/congress/v1/116/senate/members.json' do |req|

@@ -6,6 +6,6 @@ Rails.application.routes.draw do
 
 
   match '/search/bills/member/:id', to: 'bills#search_by_member', via: :get
-  get '/bills/subject/:query', to: 'bills#search_by_query'
+  get '/bills/subject/:query', to: 'bills#search_by_query', via: :get
   get '/search/:term', to: 'members#search'
 end
