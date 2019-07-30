@@ -51,13 +51,13 @@ class BillsController < ApplicationController
     end
     bills_data = JSON.parse(@resp.body)
     data = bills_data["results"]
-    active_bills = data.select{|bill| bill["active"] == true}
+    @active_bills = data.select{|bill| bill["active"] == true}
 
-    if active_bills
-      active_bills.sort_by{ |b| b["introduced_date"].split('/') }
-      @bills = active_bills.each do |bill|
+    if @active_bills
+      @active_bills.sort_by{ |b| b["introduced_date"].split('/') }
+      @active_bills.each do |bill|
         if !Bill.find_by(bill_id: bill["bill_id"])
-          new_bill = Bill.create!(
+          Bill.create!(
           active: bill["active"],
           bill_id: bill["bill_id"],
           congress: bill["congress"],
@@ -81,13 +81,11 @@ class BillsController < ApplicationController
           committees: bill["committees"],
           primary_subject: bill["primary_subject"]
         )
-
-          render json: bills
         end
       end
-      render json: @bills
+      render json: @active_bills
     else
-      response={error:"We could not find any recent bills on this subject. Please try a broader search term."}
+      response={error:"We could not find any active bills on this subject. Please try a broader search term."}
     end
   end
 
