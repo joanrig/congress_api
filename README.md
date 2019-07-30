@@ -29,7 +29,7 @@ https://medium.com/@joanrigdon/rails-api-project-part-3-adding-a-front-end-with-
 
 ## Videos
 
-Here is a walkthrough video
+https://www.loom.com/share/7f2536bd3ee84514a88d96a6d242d46e
 
 
 
