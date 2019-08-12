@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_27_162713) do
+ActiveRecord::Schema.define(version: 2019_08_12_161059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,33 @@ ActiveRecord::Schema.define(version: 2019_07_27_162713) do
     t.text "cosponsors_by_party"
     t.text "committees"
     t.string "primary_subject"
+  end
+
+  create_table "donors", force: :cascade do |t|
+    t.string "org_name"
+    t.integer "total"
+    t.integer "pacs"
+    t.integer "indivs"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "financial_disclosures", force: :cascade do |t|
+    t.integer "member_id"
+    t.string "cid"
+    t.string "cycle"
+    t.string "origin"
+    t.string "source"
+    t.string "notice"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "member_donors", force: :cascade do |t|
+    t.integer "member_id"
+    t.integer "donor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "members", force: :cascade do |t|

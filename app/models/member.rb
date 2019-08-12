@@ -3,6 +3,17 @@ class Member < ApplicationRecord
   accepts_nested_attributes_for :bills
   serialize :bills
 
+  has_one :financial_disclosure
+  accepts_nested_attributes_for :financial_disclosure
+  serialize :financial_disclosures
+
+  has_many :member_donors
+  has_many :donors, through: :member_donors
+  accepts_nested_attributes_for :donors
+  serialize :donors
+
+
+
 
   def self.get_age
     Member.all.each do |member|
