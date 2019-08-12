@@ -4,14 +4,13 @@ class Bill < ApplicationRecord
 
   def self.update_party_color
     if bill.cosponsors
-      if bill.cosponsors_by_party["R"] &&
-        bill.cosponsors_by_party["R"] > bill.cosponsors_by_party["D"]
+      cbp = bill.cospsonsors_by_party
+      if cbp["R"] && cbp["R"] > cbp["D"]
           color = "red"
-      elsif bill.cosponsors_by_party["D"] &&
-        bill.cosponsors_by_party["D"] > bill.cosponsors_by_party["R"]
+      elsif cbp["D"] && cbp["D"] > cbp["R"]
           color = "blue"
-      elsif bill.cosponsors_by_party["R"] &&
-        bill.cosponsors_by_party["D"] && bill.cosponsors_by_party["R"] == bill.cosponsors_by_party["D"]
+      elsif cbp["R"] &&
+        cbp["D"] && cbp["R"] == cbp["D"]
           color = "purple"
       else
         color = "white"
