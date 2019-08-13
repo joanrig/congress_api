@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_141843) do
   create_table "financial_disclosures", force: :cascade do |t|
     t.integer "member_id"
     t.string "cid"
+    t.string "cand_name"
     t.string "cycle"
     t.string "origin"
     t.string "source"

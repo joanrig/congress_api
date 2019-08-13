@@ -1,13 +1,13 @@
-class FinancialController < ApplicationController
+class FinancialDisclosuresController < ApplicationController
 
 
 
   def get_member_finances
     id = params[:id]
-    @member = Member.find_by(cid: id)
-    @resp = Faraday.get 'https://www.opensecrets.org/api/?method=candContrib&output=json&cid='+id do |req|
-      req.headers['apikiey'] = ENV['PROPUBLICA_API_KEY']
-    end
+    @member = Member.find_by(crp_id: id)
+    @resp = Faraday.get 'https://www.opensecrets.org/api/?method=candContrib&output=json&cid=N00009888&apikey='+ENV['OPEN_SECRETS_API_KEY']
+    binding.pry
+
 
     financial_data = JSON.parse(@resp.body)
     financial_disclosure = financial_data["response"]["contributors"]["@attributes"]
@@ -27,11 +27,10 @@ class FinancialController < ApplicationController
     donors = financial_data["response"]["contributors"]["contributor"]
     donors.each do |donor|
       new_donor = Donor.create!(
-      org_name: donor["attributes"]["org_name"],
-      total: donor["attributes"]["total"],
-      pacs: donor["attributes"]["pacs"],
-      indivs: donor["attributes"]["indivs"],
-      member_id: @member.id
+      org_name: donor["@attributes"]["org_name"],
+      total: donor["@attributes"]["total"],
+      pacs: donor["@attributes"]["pacs"],
+      indivs: donor["@attributes"]["indivs"],
       )
       new_financial_disclosure.donors << new_donor
     end

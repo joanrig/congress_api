@@ -3,6 +3,7 @@ class CreateFinancialDisclosures < ActiveRecord::Migration[5.2]
     create_table :financial_disclosures do |t|
       t.integer "member_id"
       t.string "cid"
+      t.string "cand_name"
       t.string "cycle"
       t.string "origin"
       t.string "source"
