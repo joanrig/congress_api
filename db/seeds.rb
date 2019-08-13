@@ -14,6 +14,7 @@ Bill.destroy_all
        Member.create!(
          chamber: "senate",
          propublica_id: senator["id"],
+         crp_id: senator["crp_id"],
          title: senator["title"],
          short_title: senator["short_title"],
          first_name: senator["first_name"],
@@ -57,6 +58,7 @@ Bill.destroy_all
       Member.create!(
         chamber: "house",
         propublica_id: rep["id"],
+        crp_id: rep["crp_id"],
         title: rep["title"],
         short_title: rep["short_title"],
         first_name: rep["first_name"],
