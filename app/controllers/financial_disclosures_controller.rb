@@ -11,33 +11,37 @@ class FinancialDisclosuresController < ApplicationController
     financial_disclosure = financial_data["response"]["contributors"]["@attributes"]
     fd = financial_disclosure
 
-    new_financial_disclosure = FinancialDisclosure.create!(
-      cand_name: fd["cand_name"],
-      cid: fd["cid"],
-      cycle: fd["cycle"],
-      origin: fd["origin"],
-      source: fd["source"],
-      notice: fd["notice"],
-      donors: [],
-      member_id: @member.id
-    )
-
-    donors = financial_data["response"]["contributors"]["contributor"]
-    donors.each do |donor|
-      new_donor = Donor.create!(
-      org_name: donor["@attributes"]["org_name"],
-      total: donor["@attributes"]["total"],
-      pacs: donor["@attributes"]["pacs"],
-      indivs: donor["@attributes"]["indivs"],
+    if !FinancialDisclosure.find_by(cid: fd["cid"])
+      new_financial_disclosure = FinancialDisclosure.create!(
+        cand_name: fd["cand_name"],
+        cid: fd["cid"],
+        cycle: fd["cycle"],
+        origin: fd["origin"],
+        source: fd["source"],
+        notice: fd["notice"],
+        donors: [],
+        member_id: @member.id
       )
-      new_financial_disclosure.donors << new_donor
-    end
 
-    if @member.financial_disclosure
-      render json: @member.financial_disclosure
-    else
-      response={error:"financial disclosure not found"}
-      render response
+      donors = financial_data["response"]["contributors"]["contributor"]
+      donors.each do |donor|
+        new_donor = Donor.create!(
+        org_name: donor["@attributes"]["org_name"],
+        total: donor["@attributes"]["total"],
+        pacs: donor["@attributes"]["pacs"],
+        indivs: donor["@attributes"]["indivs"],
+        )
+        new_financial_disclosure.donors << new_donor
+        new_financial_disclosure.donors
+      end
+
+      if @member.financial_disclosure
+        render json: @member.financial_disclosure
+      else
+        response={error:"financial disclosure not found"}
+        render response
+      end
     end
-  end
+  end#def method_name
+
 end

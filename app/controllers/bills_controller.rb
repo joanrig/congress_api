@@ -13,7 +13,7 @@ class BillsController < ApplicationController
   #add bill to db if not already there
     bills.each do |bill|
       if !Bill.find_by(bill_id: bill["bill_id"])
-        new_bill = Bill.create!(
+        Bill.create!(
           bill_id: bill["bill_id"],
           congress: bill["congress"],
           bill_type: bill["bill_type"],
@@ -40,6 +40,7 @@ class BillsController < ApplicationController
       render json: @member.bills
     else
       response={error:"We could not find any bills sponsored by this Congress Member. Please try again"}
+      render response
     end
   end
 
