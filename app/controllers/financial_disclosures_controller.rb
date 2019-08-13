@@ -1,6 +1,5 @@
 class FinancialController < ApplicationController
 
-#
 
 
   def get_member_finances
@@ -25,7 +24,7 @@ class FinancialController < ApplicationController
       member_id: @member.id
     )
 
-    donors = financial+data["response"]["contributors"]["contributor"]
+    donors = financial_data["response"]["contributors"]["contributor"]
     donors.each do |donor|
       new_donor = Donor.create!(
       org_name: donor["attributes"]["org_name"],
