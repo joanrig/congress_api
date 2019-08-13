@@ -5,6 +5,7 @@ class Bill < ApplicationRecord
   def self.update_party_color
     if bill.cosponsors
       cbp = bill.cospsonsors_by_party
+      
       if cbp["R"] && cbp["R"] > cbp["D"]
           color = "red"
       elsif cbp["D"] && cbp["D"] > cbp["R"]

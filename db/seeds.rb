@@ -45,7 +45,6 @@ Bill.destroy_all
     end
 
 
-
 # house members
   @resp = Faraday.get 'https://api.propublica.org/congress/v1/116/house/members.json' do |req|
     req.headers['X-API-Key'] = ENV['PROPUBLICA_API_KEY']
@@ -88,27 +87,6 @@ Bill.destroy_all
       )
      end
 
-
-#update seeds w/o dropping db
-# Member.all.each do |member|
-#   if !member.age
-#     member.get_age
-#   elsif !member.party_logo
-#     member.get_party_logo
-#   elsif !member.state_full_name
-#     member.get_full_state_name
-#   elsif !member.gender_search_term
-#     member.get_gender_search_term
-#   elsif !member.party_full_name
-#     member.get_full_party_name
-#   elsif !member.running_for_president
-#     member.update_running_for_president
-#   elsif !member.status
-#     member.get_retirement_status
-#   end
-# end
-
- #
 
  Member.get_age
  Member.get_party_logo

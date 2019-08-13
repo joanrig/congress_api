@@ -14,7 +14,6 @@ class Member < ApplicationRecord
 
 
 
-
   def self.get_age
     Member.all.each do |member|
       now = Time.now.utc.to_date
@@ -152,13 +151,13 @@ class Member < ApplicationRecord
   end
 
 
-  def self.get_headshot
-    headshots = [
-      ["Feinstein, Dianne", "https://www.feinstein.senate.gov/public/_cache/files/f/7/f784d398-78e2-402f-90da-7c48a8fa4a89/6978A65F6DC241B15DD9752496365D44.04official-hi-res-photogallery.jpg"],
-      ["Booker, Cory", "https://upload.wikimedia.org/wikipedia/commons/5/59/Cory_Booker%2C_official_portrait%2C_114th_Congress.jpg"],
-      ["Casey, Bob" "https://en.wikipedia.org/wiki/Bob_Casey_Jr.#/media/File:Bob_Casey_Jr._official_photo.jpg"]
-      ]
-  end
+  # def self.get_headshot
+  #   headshots = [
+  #     ["Feinstein, Dianne", "https://www.feinstein.senate.gov/public/_cache/files/f/7/f784d398-78e2-402f-90da-7c48a8fa4a89/6978A65F6DC241B15DD9752496365D44.04official-hi-res-photogallery.jpg"],
+  #     ["Booker, Cory", "https://upload.wikimedia.org/wikipedia/commons/5/59/Cory_Booker%2C_official_portrait%2C_114th_Congress.jpg"],
+  #     ["Casey, Bob" "https://en.wikipedia.org/wiki/Bob_Casey_Jr.#/media/File:Bob_Casey_Jr._official_photo.jpg"]
+  #     ]
+  # end
 
 #this info is manual, not auto updated from API
   def self.update_running_for_president
