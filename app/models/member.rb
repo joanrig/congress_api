@@ -7,8 +7,7 @@ class Member < ApplicationRecord
   accepts_nested_attributes_for :financial_disclosure
   serialize :financial_disclosures
 
-  has_many :member_donors
-  has_many :donors, through: :member_donors
+  has_many :donors, through: :financial_disclosure
   accepts_nested_attributes_for :donors
   serialize :donors
 
@@ -144,7 +143,7 @@ class Member < ApplicationRecord
       elsif member.party == "R"
         member.update(party_full_name: "Republican")
       #api identifies independent variously as "I" or "IN"
-    elsif member.party == "ID"
+      elsif member.party == "ID"
         member.update(party_full_name: "Independent")
       end
     end

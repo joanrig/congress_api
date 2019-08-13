@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_141843) do
   end
 
   create_table "donors", force: :cascade do |t|
+    t.integer "financial_disclosure_id"
     t.string "org_name"
     t.integer "total"
     t.integer "pacs"
@@ -56,13 +57,6 @@ ActiveRecord::Schema.define(version: 2019_08_13_141843) do
     t.string "origin"
     t.string "source"
     t.string "notice"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "member_donors", force: :cascade do |t|
-    t.integer "member_id"
-    t.integer "donor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

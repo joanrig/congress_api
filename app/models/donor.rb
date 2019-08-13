@@ -1,4 +1,3 @@
 class Donor < ApplicationRecord
-  has_many :member_donors
-  has_many :members, through: :donors
+  has_many :members, through: :financial_disclosure
 end

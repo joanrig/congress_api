@@ -6,8 +6,6 @@ class FinancialDisclosuresController < ApplicationController
     id = params[:id]
     @member = Member.find_by(crp_id: id)
     @resp = Faraday.get 'https://www.opensecrets.org/api/?method=candContrib&output=json&cid=N00009888&apikey='+ENV['OPEN_SECRETS_API_KEY']
-    binding.pry
-
 
     financial_data = JSON.parse(@resp.body)
     financial_disclosure = financial_data["response"]["contributors"]["@attributes"]
@@ -36,7 +34,7 @@ class FinancialDisclosuresController < ApplicationController
     end
 
     if @member.financial_disclosure
-      render json: @member.disclosure
+      render json: @member.financial_disclosure
     else
       response={error:"financial disclosure not found"}
       render response
