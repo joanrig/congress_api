@@ -1,7 +1,6 @@
 class FinancialDisclosuresController < ApplicationController
 
 
-
   def get_member_finances
     id = params[:id]
     @member = Member.find_by(crp_id: id)

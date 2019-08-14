@@ -12,27 +12,29 @@ class BillsController < ApplicationController
 
   #add bill to db if not already there
     bills.each do |bill|
-      if !Bill.find_by(bill_id: bill["bill_id"])
-        Bill.create!(
-          bill_id: bill["bill_id"],
-          congress: bill["congress"],
-          bill_type: bill["bill_type"],
-          color: "",
-          number: bill["number"],
-          short_title: bill["short_title"],
-          sponsor_id: bill["sponsor_id"],
-          govtrack_url: bill["govtrack_url"],
-          introduced_date: bill["introduced_date"],
-          active: bill["active"],
-          last_vote: bill["last_vote"],
-          house_passage: bill["house_passage"],
-          senate_passage: bill["senate_passage"],
-          enacted: bill["enacted"],
-          vetoed: bill["vetoed"],
-          committees: bill["committees"],
-          primary_subject: bill["primary_subject"],
-          member_id: @member.id
-        )
+      if bill["active"]
+        if !Bill.find_by(bill_id: bill["bill_id"])
+          Bill.create!(
+            bill_id: bill["bill_id"],
+            congress: bill["congress"],
+            bill_type: bill["bill_type"],
+            color: "",
+            number: bill["number"],
+            short_title: bill["short_title"],
+            sponsor_id: bill["sponsor_id"],
+            govtrack_url: bill["govtrack_url"],
+            introduced_date: bill["introduced_date"],
+            active: bill["active"],
+            last_vote: bill["last_vote"],
+            house_passage: bill["house_passage"],
+            senate_passage: bill["senate_passage"],
+            enacted: bill["enacted"],
+            vetoed: bill["vetoed"],
+            committees: bill["committees"],
+            primary_subject: bill["primary_subject"],
+            member_id: @member.id
+          )
+        end
       end
     end
 

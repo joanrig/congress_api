@@ -12,7 +12,6 @@ class Member < ApplicationRecord
   serialize :donors
 
 
-
   def self.get_age
     Member.all.each do |member|
       now = Time.now.utc.to_date
@@ -149,28 +148,6 @@ class Member < ApplicationRecord
     end
   end
 
-
-  # def self.get_headshot
-  #   headshots = [
-  #     ["Feinstein, Dianne", "https://www.feinstein.senate.gov/public/_cache/files/f/7/f784d398-78e2-402f-90da-7c48a8fa4a89/6978A65F6DC241B15DD9752496365D44.04official-hi-res-photogallery.jpg"],
-  #     ["Booker, Cory", "https://upload.wikimedia.org/wikipedia/commons/5/59/Cory_Booker%2C_official_portrait%2C_114th_Congress.jpg"],
-  #     ["Casey, Bob" "https://en.wikipedia.org/wiki/Bob_Casey_Jr.#/media/File:Bob_Casey_Jr._official_photo.jpg"]
-  #     ]
-  # end
-
-#this info is manual, not auto updated from API
-  def self.update_running_for_president
-    candidates = %w[Bennet Biden Booker Gabbard Gillibrand Harris Klobuchar Moulton O'Rourke Ryan Sanders Warren]
-
-    Member.all.each do |member|
-      candidates.each do |candidate|
-        if candidate == member.last_name
-          member.update(running_for_president: true)
-        end
-      end
-    end
-  end
-
   def self.get_retirement_status
     @resp = Faraday.get 'https://api.propublica.org/congress/v1/116/senate/members/leaving.json' do |req|
       req.headers['X-API-Key'] = ENV['PROPUBLICA_API_KEY']
@@ -206,8 +183,22 @@ class Member < ApplicationRecord
     end
   end
 
-  # sorting methods
+  #this info is manual, not auto updated from API
+  def self.update_running_for_president
+    candidates = %w[Bennet Biden Booker Gabbard Gillibrand Harris Klobuchar Moulton O'Rourke Ryan Sanders Warren]
 
+    Member.all.each do |member|
+      candidates.each do |candidate|
+        if candidate == member.last_name
+          member.update(running_for_president: true)
+        end
+      end
+    end
+  end
+
+
+
+  # sorting methods
   def self.senators
     Member.where(chamber:"senate")
   end
@@ -315,7 +306,12 @@ class Member < ApplicationRecord
     Member.where(running_for_president: true)
   end
 
-
-
-
 end
+
+# def self.get_headshot
+#   headshots = [
+#     ["Feinstein, Dianne", "https://www.feinstein.senate.gov/public/_cache/files/f/7/f784d398-78e2-402f-90da-7c48a8fa4a89/6978A65F6DC241B15DD9752496365D44.04official-hi-res-photogallery.jpg"],
+#     ["Booker, Cory", "https://upload.wikimedia.org/wikipedia/commons/5/59/Cory_Booker%2C_official_portrait%2C_114th_Congress.jpg"],
+#     ["Casey, Bob" "https://en.wikipedia.org/wiki/Bob_Casey_Jr.#/media/File:Bob_Casey_Jr._official_photo.jpg"]
+#     ]
+# end
