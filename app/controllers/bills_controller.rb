@@ -13,7 +13,8 @@ class BillsController < ApplicationController
   #add bill to db if not already there
     bills.each do |bill|
       if bill["active"]
-        if !Bill.find_by(bill_id: bill["bill_id"])
+        found_bill = Bill.find_by(bill_id: bill["bill_id"])
+        if !found_bill
           Bill.create!(
             bill_id: bill["bill_id"],
             congress: bill["congress"],
@@ -33,6 +34,16 @@ class BillsController < ApplicationController
             committees: bill["committees"],
             primary_subject: bill["primary_subject"],
             member_id: @member.id
+          )
+        else
+          found_bill.update(
+            active: bill["active"],
+            last_vote: bill["last_vote"],
+            house_passage: bill["house_passage"],
+            senate_passage: bill["senate_passage"],
+            enacted: bill["enacted"],
+            vetoed: bill["vetoed"],
+            committees: bill["committees"],
           )
         end
       end
@@ -71,24 +82,22 @@ class BillsController < ApplicationController
           sponsor_id: bill["sponsor_id"],
           govtrack_url: bill["govtrack_url"],
           introduced_date: bill["introduced_date"],
-          active: bill["active"],
           last_vote: bill["last_vote"],
           house_passage: bill["house_passage"],
           senate_passage: bill["senate_passage"],
           enacted: bill["enacted"],
           vetoed: bill["vetoed"],
-          committees: bill["committees"],
           primary_subject: bill["primary_subject"],
           cosponsors: bill["cosponsors"],
           cosponsors_by_party: bill["cosponsors_by_party"],
           committees: bill["committees"],
-          primary_subject: bill["primary_subject"]
         )
         end
       end
       render json: @active_bills
     else
       response={error:"We could not find any active bills on this subject. Please try a broader search term."}
+      render response
     end
   end
 

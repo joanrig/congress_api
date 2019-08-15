@@ -9,8 +9,11 @@ class FinancialDisclosuresController < ApplicationController
     financial_data = JSON.parse(@resp.body)
     financial_disclosure = financial_data["response"]["contributors"]["@attributes"]
     fd = financial_disclosure
+    donors = financial_data["response"]["contributors"]["contributor"]
 
-    if !FinancialDisclosure.find_by(cid: fd["cid"])
+    found_financial_disclosure = FinancialDisclosure.find_by(cid: fd["cid"])
+
+    if !found_financial_disclosure
       new_financial_disclosure = FinancialDisclosure.create!(
         cand_name: fd["cand_name"],
         cid: fd["cid"],
@@ -19,10 +22,8 @@ class FinancialDisclosuresController < ApplicationController
         source: fd["source"],
         notice: fd["notice"],
         donors: [],
-        member_id: @member.id
-      )
+        member_id: @member.id)
 
-      donors = financial_data["response"]["contributors"]["contributor"]
       donors.each do |donor|
         new_donor = Donor.create!(
         org_name: donor["@attributes"]["org_name"],
@@ -33,14 +34,25 @@ class FinancialDisclosuresController < ApplicationController
         new_financial_disclosure.donors << new_donor
         new_financial_disclosure.donors
       end
+    else
+      found_financial_disclosure.update(
+        cycle: fd["cycle"],
+        origin: fd["origin"],
+        source: fd["source"],
+        notice: fd["notice"],
+        donors: [],
+      )
 
-      if @member.financial_disclosure
-        render json: @member.financial_disclosure
-      else
-        response={error:"financial disclosure not found"}
-        render response
-      end
+      found_financial_disclosure.donors = donors
     end
+
+    if @member.financial_disclosure
+      render json: @member.financial_disclosure
+    else
+      response={error:"financial disclosure not found"}
+      render response
+    end
+
   end#def method_name
 
 end

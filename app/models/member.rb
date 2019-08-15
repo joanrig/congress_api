@@ -135,6 +135,39 @@ class Member < ApplicationRecord
     end
   end
 
+  def self.get_search_term
+    Member.all.each do |member|
+      @search_term = member.last_name +
+      member.first_name + member.state_full_name +
+      member.gender_search_term + member.party_full_name + member.next_election
+
+      @search_term += "president" if member.running_for_president === true
+      @search_term += "freshmenfreshman" if member.seniority <= 2
+      @search_term += "leaving" if member.status
+
+      member.update(search_term: @search_term)
+    end
+
+  end
+
+
+#   let searchTerm =
+# member.last_name +
+# member.first_name + member.state_full_name +
+# member.gender_search_term + member.party_full_name + member.next_election
+#
+# if (member.running_for_president === true){
+#   searchTerm += "president"
+# }
+#
+# if (member.seniority <= 2){
+#   searchTerm += "freshmenfreshman"
+# }
+#
+# if (member.status){
+#   searchTerm += "leaving"
+# }
+
   def self.get_full_party_name
     Member.all.each do |member|
       if member.party == "D"
