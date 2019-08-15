@@ -99,3 +99,5 @@ Bill.destroy_all
  Member.update_running_for_president
  Member.get_retirement_status
  Member.get_clickable_phone_number
+ Member.get_full_name
+ Member.get_short_title_and_full_name

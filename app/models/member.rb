@@ -183,6 +183,23 @@ class Member < ApplicationRecord
     end
   end
 
+  def self.get_full_name
+    Member.all.each do |member|
+      full_name = member.first_name + ' ' + member.last_name
+      member.update(full_name: full_name)
+    end
+  end
+
+  def self.get_title_and_name
+    Member.all.each do |member|
+      title_and_name =
+        member.short_title + ' ' + member.full_name
+      member.update(title_and_name: title_and_name)
+    end
+  end
+
+
+
   #this info is manual, not auto updated from API
   def self.update_running_for_president
     candidates = %w[Bennet Biden Booker Gabbard Gillibrand Harris Klobuchar Moulton O'Rourke Ryan Sanders Warren]
