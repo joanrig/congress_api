@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_193324) do
+ActiveRecord::Schema.define(version: 2019_08_15_213151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "asset_reports", force: :cascade do |t|
+    t.string "member_id"
+    t.integer "data_year"
+    t.integer "net_low"
+    t.integer "net_high"
+    t.integer "asset_count"
+    t.integer "asset_low"
+    t.integer "asset_high"
+    t.string "source"
+    t.string "origin"
+    t.datetime "update_timestamp"
+  end
 
   create_table "bills", force: :cascade do |t|
     t.integer "member_id"
