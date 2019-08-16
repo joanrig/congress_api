@@ -7,6 +7,10 @@ class Member < ApplicationRecord
   accepts_nested_attributes_for :financial_disclosure
   serialize :financial_disclosures
 
+  has_one :asset_report
+  accepts_nested_attributes_for :asset_report
+  serialize :asset_reports
+
   has_many :donors, through: :financial_disclosure
   accepts_nested_attributes_for :donors
   serialize :donors

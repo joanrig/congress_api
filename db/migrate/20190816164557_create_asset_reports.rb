@@ -1,7 +1,8 @@
 class CreateAssetReports < ActiveRecord::Migration[5.2]
   def change
-    create_table :asset_reports do |t|
-      t.string "member_id"
+    create_table "asset_reports", force: :cascade do |t|
+      t.integer "member_id"
+      t.string "crp_id"
       t.integer "data_year"
       t.integer "net_low"
       t.integer "net_high"
@@ -10,7 +11,6 @@ class CreateAssetReports < ActiveRecord::Migration[5.2]
       t.integer "asset_high"
       t.string "source"
       t.string "origin"
-      t.timestamp "update_timestamp"
     end
   end
 end

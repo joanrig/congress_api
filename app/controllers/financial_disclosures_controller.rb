@@ -22,7 +22,8 @@ class FinancialDisclosuresController < ApplicationController
         source: fd["source"],
         notice: fd["notice"],
         donors: [],
-        member_id: @member.id)
+        member_id: @member.id
+      )
 
       donors.each do |donor|
         new_donor = Donor.create!(
