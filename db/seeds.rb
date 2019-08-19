@@ -89,7 +89,6 @@ Bill.destroy_all
       )
      end
 
-
  Member.get_age
  Member.get_party_logo
  Member.get_social_media_links
