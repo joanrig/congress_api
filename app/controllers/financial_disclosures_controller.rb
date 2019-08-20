@@ -11,7 +11,7 @@ class FinancialDisclosuresController < ApplicationController
     fd = financial_disclosure
 
 
-    donors = financial_data["response"]["contributors"]["contributor"]
+    donors_data = financial_data["response"]["contributors"]["contributor"]
     #works through line 14
 
     found_financial_disclosure = FinancialDisclosure.find_by(cid: fd["cid"])
@@ -29,8 +29,8 @@ class FinancialDisclosuresController < ApplicationController
     end
 
     @donors = []
-    if donors
-      donors.each do |donor|
+    if donors_data
+      donors_data.each do |donor|
         new_donor = Donor.create!(
         org_name: donor["@attributes"]["org_name"],
         total: donor["@attributes"]["total"],
@@ -45,7 +45,7 @@ class FinancialDisclosuresController < ApplicationController
     end
 
     if @member.financial_disclosure
-      render json: @member.financial_disclosure
+      render json: { financial_disclosure: @member.financial_disclosure, donors: @member.financial_disclosure.donors }
     else
       response={error:"financial disclosure not found"}
       render response

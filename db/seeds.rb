@@ -89,7 +89,6 @@ Bill.destroy_all
       )
      end
 
-
  Member.get_age
  Member.get_party_logo
  Member.get_social_media_links
@@ -100,4 +99,5 @@ Bill.destroy_all
  Member.get_retirement_status
  Member.get_clickable_phone_number
  Member.get_full_name
- Member.get_short_title_and_full_name
+ Member.get_title_and_name
+ Member.get_search_term
