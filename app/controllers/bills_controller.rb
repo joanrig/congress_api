@@ -9,7 +9,7 @@ class BillsController < ApplicationController
     end
     bills_data = JSON.parse(@resp.body)
     bills = bills_data["results"][0]["bills"]
-    binding.pry
+
   #add bill to db if not already there
     bills.each do |bill|
         found_bill = Bill.find_by(bill_id: bill["bill_id"])
