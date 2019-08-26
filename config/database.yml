@@ -72,7 +72,7 @@ test:
 # available as an environment variable. For example:
 #
 DATABASE_URL: "postgres://utonzecyaekuvk:b6fe489270475816a0b05cff379c3d2c5654846ba5e6e38d88e3a3d6fc473a2b@ec2-75-101-133-29.compute-1.amazonaws.com:5432/d3cmkr0rko4m2g"
-#
+# #
 # You can use this database configuration with:
 
 production:
