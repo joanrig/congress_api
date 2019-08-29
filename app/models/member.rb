@@ -128,24 +128,24 @@ class Member < ApplicationRecord
   def self.get_gender_search_term
     Member.all.each do |member|
       if member.gender == "M"
-        member.update(gender_search_term: "womenfalse")
+        member.update(gender_search_term: "womynfalse")
       elsif member.gender == "F"
-        member.update(gender_search_term: "womentrue")
+        member.update(gender_search_term: "womyntrue")
       end
     end
   end
 
-  def self.get_search_term
+  def self.get_searchable_string
     Member.all.each do |member|
-      @search_term = member.last_name +
+      searchable_string = member.last_name +
       member.first_name + member.state_full_name +
       member.gender_search_term + member.party_full_name + member.next_election
 
-      @search_term += "president" if member.running_for_president === true
-      @search_term += "freshmenfreshman" if member.seniority <= 2
-      @search_term += "leaving" if member.status
+      searchable_string += "president" if member.running_for_president === true
+      searchable_string += "freshmenfreshman" if member.seniority <= 2
+      searchable_string += "leaving" if member.status
 
-      member.update(search_term: @search_term)
+      member.update(searchable_string: searchable_string)
     end
 
   end
