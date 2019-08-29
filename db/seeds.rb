@@ -100,4 +100,4 @@ Bill.destroy_all
  Member.get_clickable_phone_number
  Member.get_full_name
  Member.get_title_and_name
- Member.get_searchable_string_term
+ Member.get_searchable_string
