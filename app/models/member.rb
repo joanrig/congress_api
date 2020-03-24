@@ -3,6 +3,14 @@ class Member < ApplicationRecord
   accepts_nested_attributes_for :bills
   serialize :bills
 
+  has_one :financial_disclosure
+  accepts_nested_attributes_for :financial_disclosure
+  serialize :financial_disclosures
+
+  has_many :donors, through: :financial_disclosure
+  accepts_nested_attributes_for :donors
+  serialize :donors
+
 
   def self.get_age
     Member.all.each do |member|
@@ -127,6 +135,23 @@ class Member < ApplicationRecord
     end
   end
 
+  def self.get_search_term
+    Member.all.each do |member|
+      @search_term = member.last_name +
+      member.first_name + member.state_full_name +
+      member.gender_search_term + member.party_full_name + member.next_election
+
+      @search_term += "president" if member.running_for_president === true
+      @search_term += "freshmenfreshman" if member.seniority <= 2
+      @search_term += "leaving" if member.status
+
+      member.update(search_term: @search_term)
+    end
+
+  end
+
+
+
   def self.get_full_party_name
     Member.all.each do |member|
       if member.party == "D"
@@ -134,30 +159,8 @@ class Member < ApplicationRecord
       elsif member.party == "R"
         member.update(party_full_name: "Republican")
       #api identifies independent variously as "I" or "IN"
-    elsif member.party == "ID"
+      elsif member.party == "ID"
         member.update(party_full_name: "Independent")
-      end
-    end
-  end
-
-
-  def self.get_headshot
-    headshots = [
-      ["Feinstein, Dianne", "https://www.feinstein.senate.gov/public/_cache/files/f/7/f784d398-78e2-402f-90da-7c48a8fa4a89/6978A65F6DC241B15DD9752496365D44.04official-hi-res-photogallery.jpg"],
-      ["Booker, Cory", "https://upload.wikimedia.org/wikipedia/commons/5/59/Cory_Booker%2C_official_portrait%2C_114th_Congress.jpg"],
-      ["Casey, Bob" "https://en.wikipedia.org/wiki/Bob_Casey_Jr.#/media/File:Bob_Casey_Jr._official_photo.jpg"]
-      ]
-  end
-
-#this info is manual, not auto updated from API
-  def self.update_running_for_president
-    candidates = %w[Bennet Biden Booker Gabbard Gillibrand Harris Klobuchar Moulton O'Rourke Ryan Sanders Warren]
-
-    Member.all.each do |member|
-      candidates.each do |candidate|
-        if candidate == member.last_name
-          member.update(running_for_president: true)
-        end
       end
     end
   end
@@ -197,8 +200,39 @@ class Member < ApplicationRecord
     end
   end
 
-  # sorting methods
+  def self.get_full_name
+    Member.all.each do |member|
+      full_name = member.first_name + ' ' + member.last_name
+      member.update(full_name: full_name)
+    end
+  end
 
+  def self.get_title_and_name
+    Member.all.each do |member|
+      title_and_name =
+        member.short_title + ' ' + member.full_name
+      member.update(title_and_name: title_and_name)
+    end
+  end
+
+
+
+  #this info is manual, not auto updated from API
+  def self.update_running_for_president
+    candidates = %w[Bennet Biden Booker Gabbard Gillibrand Harris Klobuchar Moulton O'Rourke Ryan Sanders Warren]
+
+    Member.all.each do |member|
+      candidates.each do |candidate|
+        if candidate == member.last_name
+          member.update(running_for_president: true)
+        end
+      end
+    end
+  end
+
+
+
+  # sorting methods
   def self.senators
     Member.where(chamber:"senate")
   end
@@ -305,8 +339,5 @@ class Member < ApplicationRecord
   def self.presidential_candidates
     Member.where(running_for_president: true)
   end
-
-
-
 
 end

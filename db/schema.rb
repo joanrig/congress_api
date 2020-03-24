@@ -10,23 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_27_162713) do
+ActiveRecord::Schema.define(version: 2019_08_15_213151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "asset_reports", force: :cascade do |t|
+    t.string "member_id"
+    t.integer "data_year"
+    t.integer "net_low"
+    t.integer "net_high"
+    t.integer "asset_count"
+    t.integer "asset_low"
+    t.integer "asset_high"
+    t.string "source"
+    t.string "origin"
+    t.datetime "update_timestamp"
+  end
+
   create_table "bills", force: :cascade do |t|
     t.integer "member_id"
+    t.boolean "active"
     t.string "congress"
     t.string "bill_id"
     t.string "bill_type"
+    t.string "color"
     t.string "number"
     t.string "title"
     t.string "short_title"
     t.string "sponsor_id"
     t.string "govtrack_url"
     t.string "introduced_date"
-    t.boolean "active"
     t.string "last_vote"
     t.boolean "house_passage"
     t.boolean "senate_passage"
@@ -36,6 +50,28 @@ ActiveRecord::Schema.define(version: 2019_07_27_162713) do
     t.text "cosponsors_by_party"
     t.text "committees"
     t.string "primary_subject"
+  end
+
+  create_table "donors", force: :cascade do |t|
+    t.integer "financial_disclosure_id"
+    t.string "org_name"
+    t.integer "total"
+    t.integer "pacs"
+    t.integer "indivs"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "financial_disclosures", force: :cascade do |t|
+    t.integer "member_id"
+    t.string "cid"
+    t.string "cand_name"
+    t.string "cycle"
+    t.string "origin"
+    t.string "source"
+    t.string "notice"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "members", force: :cascade do |t|
@@ -75,6 +111,10 @@ ActiveRecord::Schema.define(version: 2019_07_27_162713) do
     t.boolean "running_for_president"
     t.string "status"
     t.string "status_note"
+    t.string "crp_id"
+    t.string "full_name"
+    t.string "title_and_name"
+    t.string "search_term"
   end
 
 end

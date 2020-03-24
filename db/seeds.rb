@@ -1,4 +1,5 @@
-
+Member.destroy_all
+Bill.destroy_all
 
 #senators
    @resp = Faraday.get 'https://api.propublica.org/congress/v1/116/senate/members.json' do |req|
@@ -13,6 +14,7 @@
        Member.create!(
          chamber: "senate",
          propublica_id: senator["id"],
+         crp_id: senator["crp_id"],
          title: senator["title"],
          short_title: senator["short_title"],
          first_name: senator["first_name"],
@@ -44,7 +46,6 @@
     end
 
 
-
 # house members
   @resp = Faraday.get 'https://api.propublica.org/congress/v1/116/house/members.json' do |req|
     req.headers['X-API-Key'] = ENV['PROPUBLICA_API_KEY']
@@ -57,6 +58,7 @@
       Member.create!(
         chamber: "house",
         propublica_id: rep["id"],
+        crp_id: rep["crp_id"],
         title: rep["title"],
         short_title: rep["short_title"],
         first_name: rep["first_name"],
@@ -87,28 +89,6 @@
       )
      end
 
-
-#update seeds w/o dropping db
-# Member.all.each do |member|
-#   if !member.age
-#     member.get_age
-#   elsif !member.party_logo
-#     member.get_party_logo
-#   elsif !member.state_full_name
-#     member.get_full_state_name
-#   elsif !member.gender_search_term
-#     member.get_gender_search_term
-#   elsif !member.party_full_name
-#     member.get_full_party_name
-#   elsif !member.running_for_president
-#     member.update_running_for_president
-#   elsif !member.status
-#     member.get_retirement_status
-#   end
-# end
-
- #
-
  Member.get_age
  Member.get_party_logo
  Member.get_social_media_links
@@ -118,3 +98,6 @@
  Member.update_running_for_president
  Member.get_retirement_status
  Member.get_clickable_phone_number
+ Member.get_full_name
+ Member.get_title_and_name
+ Member.get_search_term
