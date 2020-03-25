@@ -219,7 +219,7 @@ class Member < ApplicationRecord
 
   #this info is manual, not auto updated from API
   def self.update_running_for_president
-    candidates = %w[Bennet Biden Booker Gabbard Harris Klobuchar Moulton O'Rourke Ryan Sanders Warren]
+    candidates = %w[Bennet Biden Booker Gabbard Klobuchar Sanders Warren]
 
     Member.all.each do |member|
       candidates.each do |candidate|
