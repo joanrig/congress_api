@@ -28,13 +28,14 @@ https://medium.com/@joanrigdon/rails-api-project-part-3-adding-a-front-end-with-
 
 
 ## Videos
-
 https://www.loom.com/share/7f2536bd3ee84514a88d96a6d242d46e
+
+##Live Demo
+https://joan-s-portfolio.firebaseapp.com/projects
 
 
 
 ## Usage
-
 To run this app:
 
 ##PART ONE:

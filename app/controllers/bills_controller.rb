@@ -105,33 +105,5 @@ class BillsController < ApplicationController
     render json: @bills
   end
 
-    # private
-    #   def bill_params
-    #     params.require(:bill).permit(:bill_id, :congress, :bill_type, :number, :title, :short_title, :sponsor_id, :gov_track_url, :introduced_date, :active, :last_vote, :house_passage, :senate_passage, :enacted, :vetoed, :cosponsors, :cosponsors_by_party, :committees, :primary_subject, :member_id)
-    #   end
 
 end
-
-# Bill.create!(
-#   bill_id: bill["bill_id"],
-#   congress: bill["congress"],
-#   bill_type: bill["bill_type"],
-#   number: bill["number"],
-#   short_title: bill["short_title"],
-#   sponsor_id: bill["sponsor_id"],
-#   govtrack_url: bill["govtrack_url"],
-#   introduced_date: bill["introduced_date"],
-#   active: bill["active"],
-#   last_vote: bill["last_vote"],
-#   house_passage: bill["house_passage"],
-#   senate_passage: bill["senate_passage"],
-#   enacted: bill["enacted"],
-#   vetoed: bill["vetoed"],
-#   committees: bill["committees"],
-#   primary_subject: bill["primary_subject"],
-# )
-
-# member = Member.find_by(propublica_id: new_bill.sponsor_id)
-# if member
-#   new_bill.member_id = member.id
-# end

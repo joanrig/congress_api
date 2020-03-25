@@ -151,22 +151,6 @@ class Member < ApplicationRecord
   end
 
 
-#   let searchTerm =
-# member.last_name +
-# member.first_name + member.state_full_name +
-# member.gender_search_term + member.party_full_name + member.next_election
-#
-# if (member.running_for_president === true){
-#   searchTerm += "president"
-# }
-#
-# if (member.seniority <= 2){
-#   searchTerm += "freshmenfreshman"
-# }
-#
-# if (member.status){
-#   searchTerm += "leaving"
-# }
 
   def self.get_full_party_name
     Member.all.each do |member|
@@ -235,7 +219,7 @@ class Member < ApplicationRecord
 
   #this info is manual, not auto updated from API
   def self.update_running_for_president
-    candidates = %w[Bennet Biden Booker Gabbard Harris Klobuchar Moulton O'Rourke Ryan Sanders Warren]
+    candidates = %w[Bennet Biden Booker Gabbard Klobuchar Sanders Warren]
 
     Member.all.each do |member|
       candidates.each do |candidate|
@@ -357,11 +341,3 @@ class Member < ApplicationRecord
   end
 
 end
-
-# def self.get_headshot
-#   headshots = [
-#     ["Feinstein, Dianne", "https://www.feinstein.senate.gov/public/_cache/files/f/7/f784d398-78e2-402f-90da-7c48a8fa4a89/6978A65F6DC241B15DD9752496365D44.04official-hi-res-photogallery.jpg"],
-#     ["Booker, Cory", "https://upload.wikimedia.org/wikipedia/commons/5/59/Cory_Booker%2C_official_portrait%2C_114th_Congress.jpg"],
-#     ["Casey, Bob" "https://en.wikipedia.org/wiki/Bob_Casey_Jr.#/media/File:Bob_Casey_Jr._official_photo.jpg"]
-#     ]
-# end
