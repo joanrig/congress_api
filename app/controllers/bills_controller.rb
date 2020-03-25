@@ -12,7 +12,6 @@ class BillsController < ApplicationController
 
   #add bill to db if not already there
     bills.each do |bill|
-      if bill["active"]
         found_bill = Bill.find_by(bill_id: bill["bill_id"])
         if !found_bill
           Bill.create!(
@@ -46,7 +45,6 @@ class BillsController < ApplicationController
             committees: bill["committees"],
           )
         end
-      end
     end
 
     if @member.bills
